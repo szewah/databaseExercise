@@ -3,6 +3,7 @@ var router = express.Router();
 var path = require('path');
 var db = require('../models');
 
+
 /* GET signup page. */
 router.get('/', function(req, res) {
   // res.send('respond with a resource');
@@ -10,17 +11,19 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', async(req, res) => {
-  console.log(req.body);
-  db.User.create({
-    name: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.userEmail,
-    password: req.body.userPassword
-  }).then(results => {
-    console.log(results);
-  }).catch((err) => {
-    console.log(err);
-    req.json(err);
+
+  bcrypt.hash(password, 10, (err, hash) => {
+    req.flash("signMessage", "You are now registered");
+    db.User.create({
+      name: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.userEmail,
+      password: hash
+    }).then(results => {
+      console.log(results);
+    }).catch((err) => {
+      res.json(err);
+    });
   });
 });
 
