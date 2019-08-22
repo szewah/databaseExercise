@@ -8,16 +8,34 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      customerName: {
+        type: Sequelize.STRING
+      },
       address: {
         type: Sequelize.STRING
       },
+      city: {
+        type: Sequelize.STRING, 
+        validate: {notEmpty: true}
+      },
+      state: {
+        type: Sequelize.STRING
+      },
+      postCode: {
+        type: Sequelize.STRING, 
+        validate: {notEmpty: true}
+      },
+      country: {
+        type: Sequelize.STRING, 
+        validate: {notEmpty: true}
+      },
       createdAt: {
-        allowNull: false,
+        defaultValue: new Date(),
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: new Date(),
+        type: Sequelize.DATE,
       }
     });
   },

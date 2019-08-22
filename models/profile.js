@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     state: {type: DataTypes.STRING},
     postCode: {type: DataTypes.STRING, validate: {notEmpty: true}},
     country: {type: DataTypes.STRING, validate: {notEmpty: true}},
-    createdAt: {allowNull: false, type: DataTypes.DATEONLY},
-    updatedAt: {allowNull: false, type: DataTypes.DATEONLY}
+    createdAt: {type: DataTypes.DATEONLY},
+    updatedAt: {type: DataTypes.DATEONLY}
   }, {});
   Profile.associate = function(models) {
     // associations can be defined here
