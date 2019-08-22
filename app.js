@@ -7,6 +7,7 @@ var PORT = process.env.PORT || 8080;
 var signupRouter = require('./routes/signup');
 var formRouter = require('./routes/form');
 var data = require('./routes/apis/data');
+var flash = require('connect-flash');
 
 // db.User.create({
 //   name: 'MAYBE'
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('public'));
+app.use(flash());
 
 app.use('/signup', signupRouter);
 app.use('/form', formRouter);
