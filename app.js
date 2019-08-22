@@ -3,17 +3,18 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var PORT = process.env.PORT || 8080;
-var db = require('./models');
+// var db = require('./models');
+var signupRouter = require('./routes/signup');
+var formRouter = require('./routes/form');
+var data = require('./routes/apis/data');
 
-// var signupRouter = require('./routes/signup');
-// var formRouter = require('./routes/form');
-// var data = require('./routes/apis/data');
-
-db.User.create({
-  name: 'Yes',
-  lastName: 'No'
-}).then(() => console.log('worked'));
-
+// db.User.create({
+//   name: 'MAYBE'
+// }).then(user => {
+//   user.createProfile({
+//     city: 'Newport'
+//   }).then(() => console.log('worked'));
+// });
 
 var app = express();
 
@@ -25,10 +26,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('public'));
 
-// app.use('/signup', signupRouter);
-// app.use('/form', formRouter);
-// app.use('/api-data', data);
-
+app.use('/signup', signupRouter);
+app.use('/form', formRouter);
+app.use('/api-data', data);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
