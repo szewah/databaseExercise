@@ -9,9 +9,18 @@ router.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, "../views/signup.html"))
 });
 
-router.post('/api/signups', async(req, res) => {
-  res.send("You were posted");
-})
+// router.post('/', async(req, res) => {
+//   console.log(req.body);
+//   db.User.create({
+//     name: req.body.firstName,
+//     lastName: req.body.lastName,
+//     email: req.body.userEmail
+//     password: req.body.userPassword
+//   }).then(results => {
+//     console.log(results);
+//   })
+
+// })
 
 
 module.exports = router;

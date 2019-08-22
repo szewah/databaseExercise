@@ -1,11 +1,11 @@
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var PORT = 8080;
+var PORT = process.env.PORT || 8080;
 var signupRouter = require('./routes/signup');
 var formRouter = require('./routes/form');
+var data = require('./routes/apis/data');
 
 var app = express();
 
@@ -19,6 +19,7 @@ app.use(express.static('public'));
 
 app.use('/signup', signupRouter);
 app.use('/form', formRouter);
+app.use('/api-data', data);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
