@@ -1,7 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Profile = sequelize.define('Profile', {
-    customerName: {type: DataTypes.STRING, validate: {notEmpty: true}},
     address: {type: DataTypes.STRING, validate: {notEmpty: true}},
     city: {type: DataTypes.STRING, validate: {notEmpty: true}},
     state: {type: DataTypes.STRING},
@@ -11,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: {type: DataTypes.DATEONLY}
   }, {});
   Profile.associate = function(models) {
-    // associations can be defined here
+    Profile.belongsTo(models.User, {
+      foreignKey: 'userID'
+    })
   };
   return Profile;
 };
