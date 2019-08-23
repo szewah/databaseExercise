@@ -1,19 +1,25 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models').User;
+const bcrypt = require('bcryptjs');
 
-passport.use(new LocalStrategy ({ usernameField: "email" }, (email, password, done) => {
+
+passport.use(
+    new LocalStrategy ({ usernameField: "email" }, (email, password, done) => {
+        ///when a user tries to sign in, this code runs
         User.findOne({
             where: {
-            username: username
+            email: email
             }
         }).then((dbUser) => {
             if(!dbUser) {
-                return done(null, false, {message: "Wrong email"});
+            //if there's no such email, then this message is run
+                return done(null, false, {message: "Couldn't find your account"});
             }
-            else if (!dbUser.validPassword(password)) {
-                return done(null, false, {message: "Wrong password."});
-            }
+            bcrypt.compare(password, dbUser[0], dataValues.password, (err, isMatch) => {
+
+            })
+
             return done(null, dbUser);
         });
     }   
@@ -24,10 +30,10 @@ passport.use(new LocalStrategy ({ usernameField: "email" }, (email, password, do
 // Just consider this part boilerplate needed to make it all work
 passport.serializeUser(function(user, cb) {
     cb(null, user);
-  });
+});
   
-  passport.deserializeUser(function(obj, cb) {
+passport.deserializeUser(function(obj, cb) {
     cb(null, obj);
-  });
+});
   
   module.exports = passport;
