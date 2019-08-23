@@ -1,13 +1,14 @@
-var createError = require('http-errors');
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var PORT = process.env.PORT || 8080;
+const createError = require('http-errors');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const PORT = process.env.PORT || 8080;
 // var db = require('./models');
-var signupRouter = require('./routes/signup');
-var formRouter = require('./routes/form');
-var data = require('./routes/apis/data');
-var flash = require('connect-flash');
+const signupRouter = require('./routes/signup');
+const formRouter = require('./routes/form');
+const dataRouter = require('./routes/apis/data');
+const loginRouter = require('./routes/login');
+const flash = require('connect-flash');
 
 // db.User.create({
 //   name: 'MAYBE'
@@ -29,8 +30,9 @@ app.use(express.static('public'));
 app.use(flash());
 
 app.use('/signup', signupRouter);
-app.use('/form', formRouter);
-app.use('/api-data', data);
+app.use('/profile-form', formRouter);
+app.use('/api-data', dataRouter);
+app.use('/login', loginRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

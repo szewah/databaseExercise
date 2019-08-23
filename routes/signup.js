@@ -11,7 +11,6 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', async(req, res) => {
-
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) throw err;
     req.flash("signMessage", "You are now registered");
