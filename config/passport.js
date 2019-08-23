@@ -17,13 +17,16 @@ passport.use(
                 return done(null, false, {message: "Couldn't find your account"});
             }
             bcrypt.compare(password, dbUser[0], dataValues.password, (err, isMatch) => {
-
-            })
-
-            return done(null, dbUser);
+                if (err) throw err;
+                if (isMatch) {
+                    return done(null, dbUser);
+                } else {
+                    return done(null, false, {message: "Incorrect password"});
+                }
+            });
         });
-    }   
-));
+    })
+);
 
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
