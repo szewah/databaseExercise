@@ -16,7 +16,7 @@ passport.use(
             //if there's no such email, then this message is run
                 return done(null, false, {message: "Couldn't find your account"});
             }
-            bcrypt.compare(password, dbUser[0], dataValues.password, (err, isMatch) => {
+            bcrypt.compare(password, dbUser[0].dataValues.password, (err, isMatch) => {
                 if (err) throw err;
                 if (isMatch) {
                     return done(null, dbUser);

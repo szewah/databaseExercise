@@ -5,12 +5,12 @@ var db = require('../models');
 
 
 /* GET signup page. */
-router.get('/', function(req, res) {
+router.get('/signup', function(req, res) {
   // res.send('respond with a resource');
   res.sendFile(path.join(__dirname, "../views/signup.html"))
 });
 
-router.post('/', async(req, res) => {
+router.post('/api/signup', async(req, res) => {
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) throw err;
     req.flash("signMessage", "You are now registered");

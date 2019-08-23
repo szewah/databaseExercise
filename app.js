@@ -3,25 +3,16 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const PORT = process.env.PORT || 8080;
-// var db = require('./models');
 const signupRouter = require('./routes/signup');
 const formRouter = require('./routes/form');
 const dataRouter = require('./routes/apis/data');
 const loginRouter = require('./routes/login');
 const flash = require('connect-flash');
+const passport = require('./config/passport');
 
-// db.User.create({
-//   name: 'MAYBE'
-// }).then(user => {
-//   user.createProfile({
-//     city: 'Newport'
-//   }).then(() => console.log('worked'));
-// });
-
-var app = express();
+const app = express();
 
 // view engine setup
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,10 +20,16 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use(flash());
 
-app.use('/signup', signupRouter);
+
+//passport
+
+
+
+//routers
+app.use(signupRouter);
 app.use('/profile-form', formRouter);
 app.use('/api-data', dataRouter);
-app.use('/login', loginRouter)
+app.use(loginRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
