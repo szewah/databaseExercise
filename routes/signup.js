@@ -21,6 +21,7 @@ router.post('/api/signup', async(req, res) => {
       password: hash
     }).then(results => {
       console.log(results);
+      res.redirect('/login');
     }).catch((err) => {
       res.json(err);
     });

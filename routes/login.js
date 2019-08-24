@@ -5,7 +5,6 @@ const passport = require('../config/passport');
 
 /* GET login page. */
 router.get('/login', function(req, res) {
-    // res.send('respond with a resource');
     res.sendFile(path.join(__dirname, "../views/login.html"))
 });
 
